@@ -6,6 +6,10 @@ const ChatFeed = (props) => {
   const { chats, activeChat, userName, messages } = props;
 
   const chat = chats && chats[activeChat];
+  const logout = () => {
+    localStorage.clear();
+    window.location.href = '/';
+  };
 
   const renderReadReceipts = (message, isMyMessage) => chat.people.map((person, index) => person.last_read === message.id && (
     <div
@@ -36,6 +40,7 @@ const ChatFeed = (props) => {
           <div className="read-receipts" style={{ marginRight: isMyMessage ? '18px' : '0px', marginLeft: isMyMessage ? '0px' : '68px' }}>
             {renderReadReceipts(message, isMyMessage)}
           </div>
+
         </div>
       );
     });
@@ -45,6 +50,7 @@ const ChatFeed = (props) => {
 
   return (
     <div className="chat-feed">
+      <div className="Logout" onClick={() => { logout(); }}>logout</div>
       <div className="chat-title-container">
         <div className="chat-title">{chat?.title}</div>
         <div className="chat-subtitle">
